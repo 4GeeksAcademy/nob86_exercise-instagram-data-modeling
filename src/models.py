@@ -10,10 +10,10 @@ Base = declarative_base()
 class User(Base):
     __tablename__ = 'user'
     id = Column(Integer, primary_key=True)
-    username = Column(String, (50), unique = True, nullable = False)
-    firstname = Column(String, (50))
-    lastname = Column(String, (50))
-    email = Column(String, (50), unique = True, nullable = False)
+    username = Column(String(50), unique = True, nullable = False)
+    firstname = Column(String(50))
+    lastname = Column(String(50))
+    email = Column(String(50), unique = True, nullable = False)
 
     posts = relationship('Post', back_populates = 'user')
     comments = relationship('Comment', back_populates = 'author')
@@ -47,7 +47,7 @@ class Comment(Base):
 class Media(Base):
     __tablename__ = 'media'
     id = Column(Integer, primary_key=True)
-    type = Column(Enum('video', 'imagen'), nullable = False)
+    # type = Column(Enum('video', 'imagen'), nullable = False)
     url = Column(String(250))
     post_id = Column(Integer,ForeignKey('post.id'))
 
@@ -62,23 +62,23 @@ class Follower(Base):
 
 
 
-class Person(Base):
-    __tablename__ = 'person'
-    # Here we define columns for the table person
-    # Notice that each column is also a normal Python instance attribute.
-    id = Column(Integer, primary_key=True)
-    name = Column(String(250), nullable=False)
+# class Person(Base):
+#     __tablename__ = 'person'
+#     # Here we define columns for the table person
+#     # Notice that each column is also a normal Python instance attribute.
+#     id = Column(Integer, primary_key=True)
+#     name = Column(String(250), nullable=False)
 
-class Address(Base):
-    __tablename__ = 'address'
-    # Here we define columns for the table address.
-    # Notice that each column is also a normal Python instance attribute.
-    id = Column(Integer, primary_key=True)
-    street_name = Column(String(250))
-    street_number = Column(String(250))
-    post_code = Column(String(250), nullable=False)
-    person_id = Column(Integer, ForeignKey('person.id'))
-    person = relationship(Person)
+# class Address(Base):
+#     __tablename__ = 'address'
+#     # Here we define columns for the table address.
+#     # Notice that each column is also a normal Python instance attribute.
+#     id = Column(Integer, primary_key=True)
+#     street_name = Column(String(250))
+#     street_number = Column(String(250))
+#     post_code = Column(String(250), nullable=False)
+#     person_id = Column(Integer, ForeignKey('person.id'))
+#     person = relationship(Person)
 
     def to_dict(self):
         return {}
